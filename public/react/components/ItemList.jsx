@@ -21,12 +21,12 @@ export const ItemList = ({items}) => {
 				</div>
 			) : (
 				items.map((item) => (
-					<div key ={item.id}>
-					<a class = "name" onClick={() => handleItemClick(item)}>{item.name}</a>
-					<h4>{item.category}</h4>
+					<div key ={item.id} className='item'>
+					<p className="name" onClick={() => handleItemClick(item)}>{item.name}</p>
+					<h4 className="category">{item.category}</h4>
 					<img src={item.image} />
-					<p>{item.description}</p>
-					<p>Price: ${item.price}</p>
+					<p className='description'>{item.description}</p>
+					<p className='price'>Price: ${item.price}</p>
 					</div>
 				))
 			)}
