@@ -27,11 +27,15 @@ export const App = () => {
 	}, []);
 	
 
-	return ( // TODO add a Add component, and make it all look nice
+	return (
 		<main>	
       		<h1>My Amazing Inventory App</h1>
 			<h2>Items:</h2>
 			<ItemList items={items} />
+			<div>
+				{/* TODO: place add component here */}
+				<button onClick={() => console.log("Add item button clicked")} />
+			</div>
 		</main>
 	)
 }
