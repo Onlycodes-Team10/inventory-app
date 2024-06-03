@@ -17,14 +17,20 @@ export const Item = (props) => {
     console.log("Add button clicked");
   }
 
+  const handleDelete = () => {
+    // TODO: implement delete
+    console.log("Delete button clicked");
+  }
+
   return <>
     <h3>{props.Item.name}</h3>
     <h4>{props.Item.category}</h4>
     <img src={props.Item.image} alt={props.Item.name} />
     <p>{props.Item.description}</p>
     <p>Price: ${props.Item.price}</p>
-    <button onClick={handleEdit}>Edit</button> // TODO 
-    <button onClick={handleRemoveFromCart}>Remove from Cart</button> // TODO add a button to remove from cart
-    <button onClick={handleAddToCart}>Add to Cart</button> // TODO add a button to add to cart
+    <button onClick={handleEdit}>Edit</button>
+    <button onClick={handleRemoveFromCart}>Remove from Cart</button>
+    <button onClick={handleAddToCart}>Add to Cart</button>
+    <button onClick={handleDelete}>Delete Item</button>
   </>
 } 
