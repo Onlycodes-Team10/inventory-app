@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { Item } = require("../models");
+const { Items } = require("../models");
 
 // GET /Items
 router.get("/", async (req, res, next) => {
   try {
-    const items = await Item.find({});
+    const items = await Items.findAll();
     res.send(items);
   } catch (error) {
     next(error);
@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
 // GET /items/:id
 router.get("/:id", async (req, res, next) => {
   try {
-    const oneItem = await Item.findByPk(req.params.id);
+    const oneItem = await Items.findByPk(req.params.id);
     res.send(oneItem);
   } catch (error) {
     next(error);

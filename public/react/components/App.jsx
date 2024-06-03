@@ -15,6 +15,7 @@ export const App = () => {
 			const itemsData = await response.json();
 			
 			setItems(itemsData);
+			console.log(items)
 		} catch (err) {
 			console.log("Oh no an error! ", err)
 		}
