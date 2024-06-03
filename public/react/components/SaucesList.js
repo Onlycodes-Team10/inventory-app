@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sauce } from './Sauce';
+import { Sauce } from './Item';
 
 export const SaucesList = ({sauces}) => {
 	return <>
