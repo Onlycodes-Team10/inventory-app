@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const Sauce = (props) => {
+export const Items = (props) => {
 
   return <>
-    <h3>{props.sauce.name}</h3>
-    <img src={props.sauce.image} alt={props.sauce.name} />
+    <h3>{props.items.name}</h3>
+    <img src={props.items.image} alt={props.items.name} />
   </>
 } 
 	
