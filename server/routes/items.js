@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { Sauce } = require("../models");
+const { Item } = require("../models");
 
-// GET /sauce
+// GET /Items
 router.get("/", async (req, res, next) => {
   try {
-    const sauces = await Sauce.findAll();
-    res.send(sauces);
+    const items = await Item.find({});
+    res.send(items);
   } catch (error) {
     next(error);
   }
