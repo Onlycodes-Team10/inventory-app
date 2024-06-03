@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ItemList } from './ItemList';
+import { Item } from './Item';
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
@@ -7,8 +8,11 @@ import apiURL from '../api';
 export const App = () => {
 
 	const [items, setItems] = useState([]); 
-	
-	
+	const [selectedItem, setSelectedItem] = useState(null);
+
+	const handleBack = () => {
+		setSelectedItem(null);
+	};
 	
 	async function fetchItems(){
 		try {
@@ -30,12 +34,22 @@ export const App = () => {
 	return (
 		<main>	
       		<h1>My Amazing Inventory App</h1>
-			<h2>Items:</h2>
-			<ItemList items={items} />
-			<div>
-				{/* TODO: place add component here */}
-				<button onClick={() => console.log("Add item button clicked")} />
+			{selectedItem ?
+				<div className='one-item'>
+					<Item Item={selectedItem} setSelectedItem={setSelectedItem} />
+					<button onClick={handleBack}>Back to List</button>	
+				</div>
+			:
+			<div className='items-list'>	
+				<h2>Items:</h2>
+				<ItemList items={items} setSelectedItem={setSelectedItem} />
+				<div>
+					{/* TODO: place add component here */}
+					<button onClick={() => console.log("Add item button clicked")}>Add item</button>
+				</div>			
 			</div>
+			}
+
 		</main>
 	)
 }
