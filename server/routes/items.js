@@ -35,7 +35,11 @@ router.post("/", async (req, res, next) => {
 // PUT /items/:id
 router.put("/:id", async (req, res, next) => {
   try {
-    const updatedItem = await Items.update(req.params.id, req.body);
+    const updatedItem = await Items.update(req.body,{
+      where:{
+        id: req.params.id
+      }
+    });
     res.send(updatedItem);
   } catch (error) {
     next(error);
