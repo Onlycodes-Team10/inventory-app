@@ -34,8 +34,11 @@ export const Item = (props) => {
         }
     })
     const data = await res.json()
-    const itemPos = props.items.find(item => item.id===props.Item.id)
-    props.setItems(props.items.toSpliced(itemPos,1))
+    if (res.ok){
+      const itemPos = props.items.indexOf(props.items.find(item => item.id===props.Item.id))
+      props.setItems(props.items.toSpliced(itemPos,1))
+    }
+
   }
 
   return <>
