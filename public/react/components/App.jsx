@@ -45,7 +45,7 @@ export const App = () => {
 
                     : selectedItem && !addItemFormOpen ?
                         <div className='one-item'>
-                            <Item Item={selectedItem} setSelectedItem={setSelectedItem} setItemEditFormOpen={setAddItemFormOpen} selectedItem={selectedItem}/>
+                            <Item Item={selectedItem} setItems={setItems} setSelectedItem={setSelectedItem} setItemEditFormOpen={setAddItemFormOpen} selectedItem={selectedItem} items={items}/>
                             <button onClick={handleBack}>Back to List</button>
                         </div>
 
@@ -53,10 +53,8 @@ export const App = () => {
 
                         <div className='items-list'>
                             <h2>Items:</h2>
-                            <ItemList items={items} setSelectedItem={setSelectedItem} setItemEditFormOpen={setAddItemFormOpen} selectedItem={selectedItem}/>
-                            <div>
-                                <button onClick={() => setAddItemFormOpen(true)}>Add item</button>
-                            </div>
+							<button onClick={() => setAddItemFormOpen(true)}>Add item</button>
+                            <ItemList items={items} setItems={setItems} setSelectedItem={setSelectedItem} setItemEditFormOpen={setAddItemFormOpen} selectedItem={selectedItem}/>
                         </div>
             }
 

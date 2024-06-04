@@ -10,10 +10,10 @@ const addItemForm = ({setAddItemFormOpen, itemToEdit, setSelectedItem, setItems,
     const [itemPresent, setItemPresent] = useState(itemToEdit ? itemToEdit.present : false);
 
     useEffect(() => {
-      console.log('use effect')
+      // console.log('use effect')
       console.log(itemToEdit)
-        if (itemToEdit !== undefined) {
-            console.log("item present");
+        if (itemToEdit !== null) {
+            // console.log("item present");
             setItemPresent(true);
             setItemName(itemToEdit.name);
             setItemCategory(itemToEdit.category);
@@ -21,10 +21,15 @@ const addItemForm = ({setAddItemFormOpen, itemToEdit, setSelectedItem, setItems,
             setItemDescription(itemToEdit.description);
             setItemPrice(itemToEdit.price);
         } else {
-            console.log('no item present');
+            // console.log('no item present');
             setItemPresent(false);
         }
     },[itemToEdit])
+
+    const handleBack = () => {
+      setSelectedItem(null);
+      setAddItemFormOpen(false)
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -150,8 +155,10 @@ const addItemForm = ({setAddItemFormOpen, itemToEdit, setSelectedItem, setItems,
               />
             </label>
           </div>
-          <button type="submit">Add Item</button>
+          <button type="submit">{itemToEdit ? "Edit item" : "Add item"}</button>
+          <button onClick={handleBack} type="button">Back to List</button>
         </form>
+        
       );
 };
 

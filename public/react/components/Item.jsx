@@ -3,7 +3,11 @@ import apiURL from '../api'
 
 export const Item = (props) => {
 
-  const {setSelectedItem, setItemEditFormOpen, selectedItem} = props
+  const {setSelectedItem, setItemEditFormOpen, selectedItem, items, setItems} = props
+
+  const handleBack = () => {
+    setSelectedItem(null);
+  };
 
   const handleItemClick = (item) => {
 		setSelectedItem(props.Item);
@@ -34,9 +38,11 @@ export const Item = (props) => {
         }
     })
     await res.json()
+    console.log(items)
     if (res.ok){
-      const itemPos = props.items.indexOf(props.items.find(item => item.id === props.Item.id))
-      props.setItems(props.items.toSpliced(itemPos,1))
+      const itemPos = items.indexOf(items.find(item => item.id === props.Item.id))
+      setItems(items.toSpliced(itemPos,1))
+      setSelectedItem(null)
     }
 
   }
