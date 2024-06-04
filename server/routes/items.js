@@ -22,4 +22,19 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+// DELETE /items/:id 
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const oneItem = await Items.findByPk(req.params.id);
+    await oneItem.destroy()
+    res.send("Item deleted successfully");
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
+
+
 module.exports = router;
