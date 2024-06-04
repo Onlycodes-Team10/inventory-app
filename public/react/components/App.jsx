@@ -31,7 +31,10 @@ export const App = () => {
 	useEffect(() => {
 		fetchItems();
 	}, []);
-	
+
+	useEffect(() => {
+		fetchItems();
+	}, [addItemFormOpen]);
 
 	return (
 		<main>	
