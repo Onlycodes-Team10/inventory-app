@@ -41,7 +41,7 @@ export const App = () => {
         <main>
             <h1>My Amazing Inventory App</h1>
             {
-                addItemFormOpen ? <Form setAddItemFormOpen={setAddItemFormOpen} itemToEdit={selectedItem}/>
+                addItemFormOpen ? <Form setAddItemFormOpen={setAddItemFormOpen} itemToEdit={selectedItem} setSelectedItem={setSelectedItem} setItems={setItems} items={items}/>
 
                     : selectedItem && !addItemFormOpen ?
                         <div className='one-item'>

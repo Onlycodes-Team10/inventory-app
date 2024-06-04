@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-const addItemForm = ({setAddItemFormOpen, itemToEdit}) => { // TODO pass in object prop of item
+const addItemForm = ({setAddItemFormOpen, itemToEdit, setSelectedItem, setItems, items}) => { // TODO pass in object prop of item
     
     const [itemName, setItemName] = useState(itemToEdit ? itemToEdit.name : '');
     const [itemCategory, setItemCategory] = useState(itemToEdit ? itemToEdit.category : '');
@@ -50,8 +50,9 @@ const addItemForm = ({setAddItemFormOpen, itemToEdit}) => { // TODO pass in obje
 
             if (response.ok) {
                 const result = await response.json();
-                console.log('Item updated:', result);
-
+                setSelectedItem(result)
+                const itemPos = items.indexOf(items.find(item => item.id===result.id))
+                setItems(items.toSpliced(itemPos,1,result))
                 setAddItemFormOpen(false);
             } else {
                 console.error('Failed to add item');
@@ -81,7 +82,7 @@ const addItemForm = ({setAddItemFormOpen, itemToEdit}) => { // TODO pass in obje
               if (response.ok) {
                   const result = await response.json();
                   console.log('Item added:', result);
-
+              
                   setAddItemFormOpen(false);
               } else {
                   console.error('Failed to add item');
