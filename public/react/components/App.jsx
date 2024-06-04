@@ -4,11 +4,13 @@ import { Item } from './Item';
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
+import Form from "./Form";
 
 export const App = () => {
 
 	const [items, setItems] = useState([]); 
 	const [selectedItem, setSelectedItem] = useState(null);
+	const [addItemFormOpen, setAddItemFormOpen] = useState(false);
 
 	const handleBack = () => {
 		setSelectedItem(null);
@@ -29,12 +31,17 @@ export const App = () => {
 	useEffect(() => {
 		fetchItems();
 	}, []);
-	
+
+	useEffect(() => {
+		fetchItems();
+	}, [addItemFormOpen]);
 
 	return (
 		<main>	
       		<h1>My Amazing Inventory App</h1>
-			{selectedItem ?
+			{
+				addItemFormOpen ? <Form setAddItemFormOpen={setAddItemFormOpen} />
+			: selectedItem ?
 				<div className='one-item'>
 					<Item Item={selectedItem} setSelectedItem={setSelectedItem} />
 					<button onClick={handleBack}>Back to List</button>	
@@ -44,8 +51,7 @@ export const App = () => {
 				<h2>Items:</h2>
 				<ItemList items={items} setSelectedItem={setSelectedItem} />
 				<div>
-					{/* TODO: place add component here */}
-					<button onClick={() => console.log("Add item button clicked")}>Add item</button>
+					<button onClick={() => setAddItemFormOpen(true)}>Add item</button>
 				</div>			
 			</div>
 			}
