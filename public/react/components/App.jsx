@@ -11,7 +11,7 @@ export const App = () => {
     const [items, setItems] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
     const [addItemFormOpen, setAddItemFormOpen] = useState(false);
-	const [itemToEdit, setItemToEdit] = useState(undefined);
+	// const [itemToEdit, setItemToEdit] = useState(undefined);
 
     const handleBack = () => {
         setSelectedItem(null);
@@ -43,9 +43,9 @@ export const App = () => {
             {
                 addItemFormOpen ? <Form setAddItemFormOpen={setAddItemFormOpen} itemToEdit={selectedItem}/>
 
-                    : selectedItem ?
+                    : selectedItem && !addItemFormOpen ?
                         <div className='one-item'>
-                            <Item Item={selectedItem} setSelectedItem={setSelectedItem} setItemEditFormOpen={setAddItemFormOpen} setItemToEdit={setItemToEdit}/>
+                            <Item Item={selectedItem} setSelectedItem={setSelectedItem} setItemEditFormOpen={setAddItemFormOpen} selectedItem={selectedItem}/>
                             <button onClick={handleBack}>Back to List</button>
                         </div>
 
@@ -53,7 +53,7 @@ export const App = () => {
 
                         <div className='items-list'>
                             <h2>Items:</h2>
-                            <ItemList items={items} setSelectedItem={setSelectedItem} setItemEditFormOpen={setAddItemFormOpen}/>
+                            <ItemList items={items} setSelectedItem={setSelectedItem} setItemEditFormOpen={setAddItemFormOpen} selectedItem={selectedItem}/>
                             <div>
                                 <button onClick={() => setAddItemFormOpen(true)}>Add item</button>
                             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Item = (props) => {
 
-    const {setSelectedItem, setItemEditFormOpen, setItemToEdit} = props
+    const {setSelectedItem, setItemEditFormOpen, selectedItem} = props
 
     const handleItemClick = (item) => {
         setSelectedItem(props.Item);
@@ -10,7 +10,6 @@ export const Item = (props) => {
 
     const handleEdit = () => {
         setItemEditFormOpen(true);
-        setItemToEdit(props.Item)
         console.log("Edit button clicked");
     }
 
@@ -36,10 +35,14 @@ export const Item = (props) => {
             <img src={props.Item.image} alt={props.Item.name}/>
             <p className='description'>{props.Item.description}</p>
             <p className='price'>Price: ${props.Item.price}</p>
-            <button onClick={handleEdit}>Edit</button>
-            <button onClick={handleRemoveFromCart}>Remove from Cart</button>
+            {selectedItem ? 
+            <button onClick={handleEdit}>Edit Item</button>            
+            : ""}
             <button onClick={handleAddToCart}>Add to Cart</button>
-            <button onClick={handleDelete}>Delete Item</button>
+            <button onClick={handleRemoveFromCart}>Remove from Cart</button>
+            {selectedItem ? 
+            <button onClick={handleDelete}>Delete Item</button>            
+            : ""}
         </div>
     </>
 } 
