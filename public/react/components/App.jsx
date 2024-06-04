@@ -36,13 +36,13 @@ export const App = () => {
       		<h1>My Amazing Inventory App</h1>
 			{selectedItem ?
 				<div className='one-item'>
-					<Item Item={selectedItem} setSelectedItem={setSelectedItem} />
+					<Item Item={selectedItem} setSelectedItem={setSelectedItem} items={items} setItems={setItems} />
 					<button onClick={handleBack}>Back to List</button>	
 				</div>
 			:
 			<div className='items-list'>	
 				<h2>Items:</h2>
-				<ItemList items={items} setSelectedItem={setSelectedItem} />
+				<ItemList items={items} setSelectedItem={setSelectedItem} setItems={setItems}/>
 				<div>
 					{/* TODO: place add component here */}
 					<button onClick={() => console.log("Add item button clicked")}>Add item</button>

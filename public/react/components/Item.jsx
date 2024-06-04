@@ -27,7 +27,6 @@ export const Item = (props) => {
   const handleDelete = async (e) => {
     // TODO: implement delete
     e.preventDefault()
-    console.log(props.Item)
     const res = await fetch(`${apiURL}/items/${props.Item.id}`,{
         method: "DELETE",
         headers: {
@@ -35,7 +34,8 @@ export const Item = (props) => {
         }
     })
     const data = await res.json()
-    console.log(data)
+    const itemPos = props.items.find(item => item.id===props.Item.id)
+    props.setItems(props.items.toSpliced(itemPos,1))
   }
 
   return <>
