@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Item } from './Item'; 
 
 export const ItemList = ({items, setSelectedItem, setItemEditFormOpen, selectedItem}) => {
