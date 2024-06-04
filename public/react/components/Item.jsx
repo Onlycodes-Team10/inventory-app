@@ -1,4 +1,5 @@
 import React from 'react';
+import apiURL from '../api'
 
 export const Item = (props) => {
 
@@ -23,9 +24,18 @@ export const Item = (props) => {
     console.log("Add button clicked");
   }
 
-  const handleDelete = () => {
+  const handleDelete = async (e) => {
     // TODO: implement delete
-    console.log("Delete button clicked");
+    e.preventDefault()
+    console.log(props.Item)
+    const res = await fetch(`${apiURL}/items/${props.Item.id}`,{
+        method: "DELETE",
+        headers: {
+          'Content-type': 'application/json'
+        }
+    })
+    const data = await res.json()
+    console.log(data)
   }
 
   return <>
