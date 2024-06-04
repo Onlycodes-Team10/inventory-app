@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Item = (props) => {
 
-    const {setSelectedItem, setItemEditFormOpen} = props
+    const {setSelectedItem, setItemEditFormOpen, setItemToEdit} = props
 
     const handleItemClick = (item) => {
         setSelectedItem(props.Item);
@@ -10,6 +10,7 @@ export const Item = (props) => {
 
     const handleEdit = () => {
         setItemEditFormOpen(true);
+        setItemToEdit(props.Item)
         console.log("Edit button clicked");
     }
 
