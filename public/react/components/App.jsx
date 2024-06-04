@@ -1,55 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import { ItemList } from './ItemList';
-import { Item } from './Item';
+import React, {useState, useEffect} from 'react';
+import {ItemList} from './ItemList';
+import {Item} from './Item';
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
+import Form from "./Form";
 
 export const App = () => {
 
-	const [items, setItems] = useState([]); 
-	const [selectedItem, setSelectedItem] = useState(null);
+    const [items, setItems] = useState([]);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [addItemFormOpen, setAddItemFormOpen] = useState(false);
+	// const [itemToEdit, setItemToEdit] = useState(undefined);
 
-	const handleBack = () => {
-		setSelectedItem(null);
-	};
-	
-	async function fetchItems(){
-		try {
-			const response = await fetch(`${apiURL}/items`);
-			const itemsData = await response.json();
-			
-			setItems(itemsData);
-			console.log(items)
-		} catch (err) {
-			console.log("Oh no an error! ", err)
-		}
-	}
+    const handleBack = () => {
+        setSelectedItem(null);
+    };
 
-	useEffect(() => {
-		fetchItems();
-	}, []);
-	
+    async function fetchItems() {
+        try {
+            const response = await fetch(`${apiURL}/items`);
+            const itemsData = await response.json();
 
-	return (
-		<main>	
-      		<h1>My Amazing Inventory App</h1>
-			{selectedItem ?
-				<div className='one-item'>
-					<Item Item={selectedItem} setSelectedItem={setSelectedItem} items={items} setItems={setItems} />
-					<button onClick={handleBack}>Back to List</button>	
-				</div>
-			:
-			<div className='items-list'>	
-				<h2>Items:</h2>
-				<ItemList items={items} setSelectedItem={setSelectedItem} setItems={setItems}/>
-				<div>
-					{/* TODO: place add component here */}
-					<button onClick={() => console.log("Add item button clicked")}>Add item</button>
-				</div>			
-			</div>
-			}
+            setItems(itemsData);
+            //console.log(items)
+        } catch (err) {
+            console.log("Oh no an error! ", err)
+        }
+    }
 
-		</main>
-	)
-}
+    useEffect(() => {
+        fetchItems();
+    }, []);
+
+    // useEffect(() => {
+    //     fetchItems();
+    // }, [addItemFormOpen]);
+
+    return (
+        <main>
+            <h1>My Amazing Inventory App</h1>
+            {
+                addItemFormOpen ? <Form setAddItemFormOpen={setAddItemFormOpen} itemToEdit={selectedItem} setSelectedItem={setSelectedItem} setItems={setItems} items={items}/>
+
+                    : selectedItem && !addItemFormOpen ?
+                        <div className='one-item'>
+                            <Item Item={selectedItem} setSelectedItem={setSelectedItem} setItemEditFormOpen={setAddItemFormOpen} selectedItem={selectedItem}/>
+                            <button onClick={handleBack}>Back to List</button>
+                        </div>
+
+                        :
+
+                        <div className='items-list'>
+                            <h2>Items:</h2>
+                            <ItemList items={items} setSelectedItem={setSelectedItem} setItemEditFormOpen={setAddItemFormOpen} selectedItem={selectedItem}/>
+                            <div>
+                                <button onClick={() => setAddItemFormOpen(true)}>Add item</button>
+                            </div>
+                        </div>
+            }
+
+        </main>
+    )}

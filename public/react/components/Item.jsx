@@ -54,4 +54,47 @@ export const Item = (props) => {
     <button onClick={handleDelete}>Delete Item</button>
   </div>
   </>
+    const {setSelectedItem, setItemEditFormOpen, selectedItem} = props
+
+    const handleItemClick = (item) => {
+        setSelectedItem(props.Item);
+    };
+
+    const handleEdit = () => {
+        setItemEditFormOpen(true);
+        console.log("Edit button clicked");
+    }
+
+    const handleRemoveFromCart = () => {
+        // TODO: implement remove
+        console.log("Remove button clicked");
+    }
+
+    const handleAddToCart = () => {
+        // TODO: implement add
+        console.log("Add button clicked");
+    }
+
+    const handleDelete = () => {
+        // TODO: implement delete
+        console.log("Delete button clicked");
+    }
+
+    return <>
+        <div className="item">
+            <h3 className='name' onClick={handleItemClick}>{props.Item.name}</h3>
+            <h4 className='category'>{props.Item.category}</h4>
+            <img src={props.Item.image} alt={props.Item.name}/>
+            <p className='description'>{props.Item.description}</p>
+            <p className='price'>Price: ${props.Item.price}</p>
+            {selectedItem ? 
+            <button onClick={handleEdit}>Edit Item</button>            
+            : ""}
+            <button onClick={handleAddToCart}>Add to Cart</button>
+            <button onClick={handleRemoveFromCart}>Remove from Cart</button>
+            {selectedItem ? 
+            <button onClick={handleDelete}>Delete Item</button>            
+            : ""}
+        </div>
+    </>
 } 
