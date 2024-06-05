@@ -18,7 +18,7 @@
 }
 
 
-.name {
+.name , .search-title{
   font-family: "Chakra Petch", sans-serif;
   font-size: 1.17em;
   font-weight: bold;
@@ -84,7 +84,7 @@ main {
   margin-top: 10px;
   padding: 10px;
   background-color: white;
-  max-height: 450px;
+  height: 450px;
   scroll-behavior: smooth;
   overflow-y: scroll;
 }
@@ -121,7 +121,7 @@ form {
   border-radius: 20px;
 }
 
-input {
+input, select {
   /* background-color: white; */
   width: 200px;
   padding: 10px;
@@ -163,3 +163,19 @@ form textarea[name="description"]{
   display: flex;
   justify-content: center;
 } 
+
+.results-list li{
+  list-style-type: none;
+}
+
+.results-list {
+  padding-top: 10px;
+}
+
+.search-form input, .search-form select, .search-form button{
+  margin : 5px;
+}
+
+select {
+  font-family: "Chakra Petch", sans-serif;
+}
