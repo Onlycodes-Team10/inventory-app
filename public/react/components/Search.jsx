@@ -15,8 +15,8 @@ const SearchComponent = ({ setSelectedItem }) => {
 
             if (response.headers.get('content-type')?.includes('application/json')) {
                 const data = JSON.parse(text);
-                setResults(data);
-                setNoResults(false);
+                setResults(Array.isArray(data) ? data : []);
+                setNoResults(data.length === 0);
             } else {
                 console.error('Expected JSON, got something else');
                 setNoResults(true);
