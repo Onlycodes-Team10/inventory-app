@@ -7,16 +7,18 @@ const SearchComponent = () => {
 
     const handleSearch = async () => {
         try {
-            const response = await fetch('/api/search?query=${searchTerm}&category=${category}');
+            const response = await fetch(`http://localhost:3000/api/search?query=${encodeURIComponent(searchTerm)}&category=${encodeURIComponent(category)}`);
             const text = await response.text();
-            console.log('raw response: ', text); //more debugging
-            if (!response.ok) {
-                throw new Error('Network response not ok');
+            console.log('Raw response:', text); // Log the raw response text
+
+            if (response.headers.get('content-type')?.includes('application/json')) {
+                const data = JSON.parse(text);
+                setResults(data);
+            } else {
+                console.error('Expected JSON, got something else');
             }
-            const data = await response.json();
-            setResults(data);
         } catch (error) {
-            console.error('a wild error appeared! ', error);
+            console.error('Error fetching search results:', error);
         }
     };
 
@@ -25,10 +27,10 @@ const SearchComponent = () => {
             <h1>Search</h1>
             <div>
                 <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search..."
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search..."
                 />
                 <select value={category} onChange={(e) => setCategory(e.target.value)}>
                     <option value="all">All</option>
@@ -43,7 +45,7 @@ const SearchComponent = () => {
                 <h2>Results</h2>
                 <ul>
                     {results.map((result) => (
-                        <li key={result.id}>(result.name)</li>
+                        <li key={result.id}>{result.name}</li>
                     ))}
                 </ul>
             </div>

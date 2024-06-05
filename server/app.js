@@ -5,8 +5,6 @@ const app = express();
 const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
-const { Sequelize } = require('sequelize');
-const { Items, db } = require('./models/index');
 
 //Allow CORS requests
 app.use(cors());
@@ -19,31 +17,49 @@ app.use(express.json());
 // serve up static files (e.g. html and css files)
 app.use(express.static(path.join(__dirname, '../dist')));
 
-// api router
-app.use('/api', require('./routes'));
-
-// search endpoint
+// Search endpoint
 app.get('/api/search', async (req, res) => {
   const { query, category } = req.query;
 
   let whereClause = {};
-  if (category && category !== 'all') {
-    whereClause.category = category;
-  }
   if (query) {
-    whereClause.name = {
-      [Sqeuelize.Op.like]: '%${query}%',
-    };
+    switch (category) {
+      case 'name':
+        whereClause.name = { [Sequelize.Op.like]: `%${query}%` };
+        break;
+      case 'category':
+        whereClause.category = { [Sequelize.Op.like]: `%${query}%` };
+        break;
+      case 'description':
+        whereClause.description = { [Sequelize.Op.like]: `%${query}%` };
+        break;
+      case 'price':
+        whereClause.price = { [Sequelize.Op.eq]: parseFloat(query) };
+        break;
+      default:
+        whereClause = {
+          [Sequelize.Op.or]: [
+            { name: { [Sequelize.Op.like]: `%${query}%` } },
+            { category: { [Sequelize.Op.like]: `%${query}%` } },
+            { description: { [Sequelize.Op.like]: `%${query}%` } },
+            { price: { [Sequelize.Op.eq]: parseFloat(query) } }
+          ]
+        };
+    }
   }
 
   try {
     const results = await Items.findAll({ where: whereClause });
+    res.setHeader('Content-Type', 'application/json');
     res.json(results);
   } catch (error) {
-    console.error('a wild error appeared! ', error);
-    res.status(500).json({ error: 'a wild Server error appeared! ', message: error.message }); //extra debugging to find out why search is unhappy
+    console.error('Error fetching search results:', error);
+    res.status(500).json({ error: 'Server error', message: error.message });
   }
 });
+
+// api router
+app.use('/api', require('./routes'));
 
 // 404 handler
 app.use((req, res) => {
@@ -58,5 +74,3 @@ app.use((error, req, res, next) => {
 });
 
 module.exports = app;
-
-
