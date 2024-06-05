@@ -47,9 +47,9 @@ export const Item = (props) => {
 
   }
 
-  return <>
-    <div className="item" >
-      <h3 className='name' onClick={handleItemClick}>{props.Item.name}</h3>
+  return (
+    <div className="item" onClick={handleItemClick} >
+      <h3 className='name' >{props.Item.name}</h3>
       <h4 className='category'>{props.Item.category}</h4>
       <img src={props.Item.image} alt={props.Item.name} />
       <p className='description'>{props.Item.description}</p>
@@ -63,5 +63,5 @@ export const Item = (props) => {
         <button onClick={handleDelete}>Delete Item</button>            
         : ""}
     </div>
-  </>
+  )
 } 

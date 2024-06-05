@@ -101,52 +101,59 @@ const addItemForm = ({setAddItemFormOpen, itemToEdit, setSelectedItem, setItems,
 
     return (
         <form onSubmit={handleSubmit}>
-          <div>
+
+            <div className='form-label'>
             <label>
-              Item Name:
+              Item Name: </label>
               <input
                 type="text"
                 value={itemName} // TODO
                 onChange={(e) => setItemName(e.target.value)}
                 required
               />
-            </label>
-          </div>
-          <div>
+           
+            </div>
+
+            <div className='form-label'>
             <label>
-              Category:
+              Category:</label>
               <input
                 type="text"
                 value={itemCategory}
                 onChange={(e) => setItemCategory(e.target.value)}
                 required
               />
-            </label>
-          </div>
-          <div>
+            
+            </div>
+
+            <div className='form-label'>
             <label>
-              Image Link:
+              Image Link: </label>
               <input
                 type="text"
                 value={itemImage}
                 onChange={(e) => setItemImage(e.target.value)}
                 required
               />
-            </label>
-          </div>
-          <div>
+           
+            </div>
+
+            <div className='form-label'>
             <label>
               Description:
+            </label>
               <textarea
+                type="text"
+                name="description"
                 value={itemDescription}
                 onChange={(e) => setItemDescription(e.target.value)}
                 required
               />
-            </label>
-          </div>
-          <div>
+            </div>
+
+            <div className='form-label'>
             <label>
-              Price:
+              Price: </label>
               <input
                 type="number"
                 step="0.01"
@@ -154,10 +161,13 @@ const addItemForm = ({setAddItemFormOpen, itemToEdit, setSelectedItem, setItems,
                 onChange={(e) => setItemPrice(e.target.value)}
                 required
               />
-            </label>
-          </div>
-          <button type="submit">{itemToEdit ? "Edit item" : "Add item"}</button>
-          <button onClick={handleBack} type="button">Back to List</button>
+           
+            </div>
+            <div className='form-btns'>
+              <button type="submit">{itemToEdit ? "Edit item" : "Add item"}</button>
+              <button onClick={handleBack} type="button">Back to List</button>
+            </div>
+
         </form>
         
       );
