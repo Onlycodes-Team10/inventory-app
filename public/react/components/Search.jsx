@@ -5,6 +5,7 @@ const SearchComponent = ({ setSelectedItem }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [category, setCategory] = useState('all');
     const [results, setResults] = useState([]);
+    const [noResults, setNoResults] = useState(false);
 
     const handleSearch = async () => {
         try {
@@ -15,11 +16,14 @@ const SearchComponent = ({ setSelectedItem }) => {
             if (response.headers.get('content-type')?.includes('application/json')) {
                 const data = JSON.parse(text);
                 setResults(data);
+                setNoResults(false);
             } else {
                 console.error('Expected JSON, got something else');
+                setNoResults(true);
             }
         } catch (error) {
             console.error('Error fetching search results:', error);
+            setNoResults(true);
         }
     };
 
@@ -44,7 +48,10 @@ const SearchComponent = ({ setSelectedItem }) => {
             </div>
             <div>
                 <h2>Results</h2>
-                <ul>
+                {noResults ? (
+                    <h1>No results found, please try again</h1>
+                ) : (
+                    <ul>
                     {results.map((result) => (
                         <li key={result.id}>
                             <Item Item={result} onItemClick={setSelectedItem} />
@@ -52,6 +59,8 @@ const SearchComponent = ({ setSelectedItem }) => {
                     ))}
 
                 </ul>
+                )}
+
             </div>
         </div>
     );
