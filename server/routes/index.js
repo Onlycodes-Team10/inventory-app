@@ -22,7 +22,7 @@ router.get('/items', async (req, res) => {
 router.get('/search', async (req, res) => {
     const { query, category } = req.query;
   
-    let whereClause = [];
+    let whereClause = {};
     if (query) {
       switch (category) {
         case 'name':
@@ -37,16 +37,16 @@ router.get('/search', async (req, res) => {
         case 'price':
           whereClause.price = { [Sequelize.Op.eq]: parseFloat(query) };
           break;
-        default:
-          whereClause = {
-            [Sequelize.Op.or]: [
-              { name: { [Sequelize.Op.like]: `%${query}%` } },
-              { category: { [Sequelize.Op.like]: `%${query}%` } },
-              { description: { [Sequelize.Op.like]: `%${query}%` } },
-              { price: { [Sequelize.Op.eq]: parseFloat(query) } }
-            ]
-          };
-    }
+          default:
+            whereClause = {
+              [Sequelize.Op.or]: [
+                { name: { [Sequelize.Op.like]: `%${query}%` } },
+                { category: { [Sequelize.Op.like]: `%${query}%` } },
+                { description: { [Sequelize.Op.like]: `%${query}%` } },
+                { price: { [Sequelize.Op.eq]: parseFloat(query) } }
+              ]
+            };
+          }
     }
     try {
       const results = await Items.findAll({ where: whereClause });
