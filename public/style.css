@@ -36,9 +36,8 @@ main {
 .items-list{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 100px;
-  padding-left: 10px;
-  padding-right: 10px;
+  grid-column-gap: 50px;
+  margin: 0 auto;
 }
 
 .category {
@@ -52,10 +51,11 @@ main {
   /* background-color:  rgb(15, 16, 112); */
   font-family: "Chakra Petch", sans-serif;
   font-weight: normal;
-  color: black;
+  color: white;
   font-size: 15px;
   margin: 0 auto;
   margin-bottom: 5px;
+  background-color: rgb(63, 63, 101);
 }
 
 .description{
@@ -82,8 +82,9 @@ main {
   margin-top: 10px;
   padding: 10px;
   background-color: white;
-  max-height: 500px;
- 
+  max-height: 450px;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
 }
 
 img {
@@ -99,6 +100,7 @@ button, form button{
   border: solid 1px black;
   border-radius: 10px;
   font-family: "Chakra Petch", sans-serif;
+  font-weight: bold;
 }
 
 button:hover, form button:hover {
@@ -111,6 +113,7 @@ form {
   display: grid;
   text-align: center;
   width: 450px;
+  height: 450px;
   margin: 0 auto;
   padding-top: 20px;
   border: solid 5px rgb(10, 11, 84);;
