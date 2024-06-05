@@ -46,6 +46,9 @@ export const App = () => {
             <button onClick={() => setShowSearchPage(!showSearchPage)}>
                 {showSearchPage ? 'Back to Main Page' : 'Go to Search Page'}
             </button>
+            <h1 className='title'>My Amazing Inventory App</h1>
+            {
+                addItemFormOpen ? <Form setAddItemFormOpen={setAddItemFormOpen} itemToEdit={selectedItem} setSelectedItem={setSelectedItem} setItems={setItems} items={items}/>
 
             {showSearchPage ? (
                 <SearchComponent setSelectedItem={handleSetSelectedItem}/>
@@ -82,6 +85,13 @@ export const App = () => {
                                 setItemEditFormOpen={setAddItemFormOpen}
                                 selectedItem={selectedItem}
                             />
+
+                        :
+
+                        <div className='main-container'>
+                        <button onClick={() => setAddItemFormOpen(true)}>Add your item</button>
+                        {/* <h2>Items:</h2> */}
+                            <ItemList items={items} setItems={setItems} setSelectedItem={setSelectedItem} setItemEditFormOpen={setAddItemFormOpen} selectedItem={selectedItem}/>
                         </div>
                     )}
                 </>
