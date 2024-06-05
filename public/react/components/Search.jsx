@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Item } from './Item';
 
-const SearchComponent = () => {
+const SearchComponent = ({ setSelectedItem }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [category, setCategory] = useState('all');
     const [results, setResults] = useState([]);
@@ -45,8 +46,11 @@ const SearchComponent = () => {
                 <h2>Results</h2>
                 <ul>
                     {results.map((result) => (
-                        <li key={result.id}>{result.name}</li>
+                        <li key={result.id}>
+                            <Item Item={result} onItemClick={setSelectedItem} />
+                        </li>
                     ))}
+
                 </ul>
             </div>
         </div>

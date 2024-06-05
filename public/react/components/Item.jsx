@@ -3,14 +3,18 @@ import apiURL from '../api'
 
 export const Item = (props) => {
 
-  const {setSelectedItem, setItemEditFormOpen, selectedItem, items, setItems} = props
+  const {setSelectedItem, setItemEditFormOpen, selectedItem, items, setItems, onItemClick } = props
 
   const handleBack = () => {
     setSelectedItem(null);
   };
 
   const handleItemClick = (item) => {
-		setSelectedItem(props.Item);
+		if (onItemClick) {
+      onItemClick(props.Item);
+    } else {
+      setSelectedItem(props.Item);
+    }
 	};
 
   const handleEdit = () => {
@@ -29,7 +33,6 @@ export const Item = (props) => {
   }
 
   const handleDelete = async (e) => {
-    // TODO: implement delete
     e.preventDefault()
     const res = await fetch(`${apiURL}/items/${props.Item.id}`,{
         method: "DELETE",

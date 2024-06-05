@@ -35,9 +35,10 @@ export const App = () => {
         fetchItems();
     }, []);
 
-    // useEffect(() => {
-    //     fetchItems();
-    // }, [addItemFormOpen]);
+    const handleSetSelectedItem = (item) => {
+        setSelectedItem(item);
+        setShowSearchPage(false);
+    }
 
     return (
         <main>
@@ -47,7 +48,7 @@ export const App = () => {
             </button>
 
             {showSearchPage ? (
-                <SearchComponent />
+                <SearchComponent setSelectedItem={handleSetSelectedItem}/>
             ) : (
                 <>
                     {addItemFormOpen ? (
