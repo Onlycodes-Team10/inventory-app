@@ -5,6 +5,9 @@ const app = express();
 const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
+const routes = require('./routes');
+const { Sequelize } = require('sequelize');
+
 
 //Allow CORS requests
 app.use(cors());
@@ -59,7 +62,7 @@ app.get('/api/search', async (req, res) => {
 });
 
 // api router
-app.use('/api', require('./routes'));
+app.use('/api', routes);
 
 // 404 handler
 app.use((req, res) => {
