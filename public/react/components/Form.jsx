@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import apiURL from '../api';
 
 const addItemForm = ({setAddItemFormOpen, itemToEdit, setSelectedItem, setItems, items}) => { // TODO pass in object prop of item
     
@@ -45,7 +46,7 @@ const addItemForm = ({setAddItemFormOpen, itemToEdit, setSelectedItem, setItems,
           };
 
           try {
-            const response = await fetch(`http://localhost:3000/api/items/${itemToEdit.id}`, {
+            const response = await fetch(`${apiURL}/items/${itemToEdit.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,7 +77,7 @@ const addItemForm = ({setAddItemFormOpen, itemToEdit, setSelectedItem, setItems,
           };
 
           try {
-              const response = await fetch('http://localhost:3000/api/items', {
+              const response = await fetch(`${apiURL}/items`, {
                   method: 'POST', // TODO
                   headers: {
                       'Content-Type': 'application/json',
