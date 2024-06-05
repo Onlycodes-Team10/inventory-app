@@ -58,4 +58,45 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
+//search
+router.get('/search', async (req, res) => {
+  const { query, category } = req.query;
+
+  let whereClause = [];
+  if (query) {
+    switch (category) {
+      case 'name':
+        whereClause.name = { [Sequelize.Op.like]: `%${query}%` };
+        break;
+      case 'category':
+        whereClause.category = { [Sequelize.Op.like]: `%${query}%` };
+        break;
+      case 'description':
+        whereClause.description = { [Sequelize.Op.like]: `%${query}%` };
+        break;
+      case 'price':
+        whereClause.price = { [Sequelize.Op.eq]: parseFloat(query) };
+        break;
+      default:
+        whereClause = {
+          [Sequelize.Op.or]: [
+            { name: { [Sequelize.Op.like]: `%${query}%` } },
+            { category: { [Sequelize.Op.like]: `%${query}%` } },
+            { description: { [Sequelize.Op.like]: `%${query}%` } },
+            { price: { [Sequelize.Op.eq]: parseFloat(query) } }
+          ]
+        };
+  }
+  }
+  try {
+    const results = await Items.findAll({ where: whereClause });
+    res.setHeader('Content-Type', 'application/json');
+    res.json(results);
+  } catch (error) {
+    console.error('A wild error appeared! ', error);
+    res.status(500).json({ error: 'a wild server error appeared! ', message: error.message });
+  }
+
+});
+
 module.exports = router;
