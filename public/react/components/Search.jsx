@@ -29,8 +29,8 @@ const SearchComponent = ({ setSelectedItem }) => {
 
     return (
         <div>
-            <h1>Search</h1>
-            <div>
+            <h1 className='search-title'>Search</h1>
+            <div className='search-form'>
                 <input
                     type="text"
                     value={searchTerm}
@@ -47,18 +47,17 @@ const SearchComponent = ({ setSelectedItem }) => {
                 <button onClick={handleSearch}>Search</button>
             </div>
             <div>
-                <h2>Results</h2>
                 {noResults ? (
-                    <h1>No results found, please try again</h1>
+                    <h1 className='search-title'>No results found, please try again.</h1>
                 ) : (
-                    <ul>
+                    <div className='items-list results-list'>
                     {results.map((result) => (
-                        <li key={result.id}>
+                        <div key={result.id}>
                             <Item Item={result} onItemClick={setSelectedItem} />
-                        </li>
+                        </div>
                     ))}
 
-                </ul>
+                </div>
                 )}
 
             </div>

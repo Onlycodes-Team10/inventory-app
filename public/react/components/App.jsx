@@ -39,8 +39,15 @@ export const App = () => {
     return (
         <main>
             <h1 className="title">My Amazing Inventory App</h1>
-            <button onClick={() => setShowSearchPage(!showSearchPage)}>
-                {showSearchPage ? 'Back to Main Page' : 'Go to Search Page'}
+            <button onClick={() => {
+                if (addItemFormOpen){
+                    setAddItemFormOpen(false)
+                    setShowSearchPage(false)
+                } else {
+                    setShowSearchPage(!showSearchPage)
+                }
+                } }>
+                {showSearchPage || addItemFormOpen ? 'Back to Main Page' : 'Go to Search Page'}
             </button>
 
             {addItemFormOpen ? (
