@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Item } from './Item';
+import apiURL from '../api';
 
 const SearchComponent = ({ setSelectedItem }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -8,8 +9,9 @@ const SearchComponent = ({ setSelectedItem }) => {
     const [noResults, setNoResults] = useState(false);
 
     const handleSearch = async () => {
+        console.log(apiURL)
         try {
-            const response = await fetch(`http://localhost:3000/api/search?query=${encodeURIComponent(searchTerm)}&category=${encodeURIComponent(category)}`);
+            const response = await fetch(`${apiURL}/search?query=${encodeURIComponent(searchTerm)}&category=${encodeURIComponent(category)}`);
             const text = await response.text();
             console.log('Raw response:', text); // Log the raw response text
 
