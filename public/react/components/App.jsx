@@ -51,9 +51,9 @@ export const App = () => {
 
                         :
 
-                        <div className='items-list'>
-                            <h2>Items:</h2>
-							<button onClick={() => setAddItemFormOpen(true)}>Add item</button>
+                        <div className='main-container'>
+                        <button onClick={() => setAddItemFormOpen(true)}>Add item</button>
+                        <h2>Items:</h2>
                             <ItemList items={items} setItems={setItems} setSelectedItem={setSelectedItem} setItemEditFormOpen={setAddItemFormOpen} selectedItem={selectedItem}/>
                         </div>
             }
