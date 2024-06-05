@@ -39,7 +39,7 @@ export const App = () => {
 
     return (
         <main>
-            <h1>My Amazing Inventory App</h1>
+            <h1 className='title'>My Amazing Inventory App</h1>
             {
                 addItemFormOpen ? <Form setAddItemFormOpen={setAddItemFormOpen} itemToEdit={selectedItem} setSelectedItem={setSelectedItem} setItems={setItems} items={items}/>
 
@@ -51,9 +51,9 @@ export const App = () => {
 
                         :
 
-                        <div className='items-list'>
-                            <h2>Items:</h2>
-							<button onClick={() => setAddItemFormOpen(true)}>Add item</button>
+                        <div className='main-container'>
+                        <button onClick={() => setAddItemFormOpen(true)}>Add your item</button>
+                        {/* <h2>Items:</h2> */}
                             <ItemList items={items} setItems={setItems} setSelectedItem={setSelectedItem} setItemEditFormOpen={setAddItemFormOpen} selectedItem={selectedItem}/>
                         </div>
             }
