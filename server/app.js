@@ -41,7 +41,7 @@ app.get('/api/search', async (req, res) => {
     res.json(results);
   } catch (error) {
     console.error('a wild error appeared! ', error);
-    res.status(500).send('Server error');
+    res.status(500).json({ error: 'a wild Server error appeared! ', message: error.message }); //extra debugging to find out why search is unhappy
   }
 });
 

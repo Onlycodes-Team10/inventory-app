@@ -8,6 +8,8 @@ const SearchComponent = () => {
     const handleSearch = async () => {
         try {
             const response = await fetch('/api/search?query=${searchTerm}&category=${category}');
+            const text = await response.text();
+            console.log('raw response: ', text); //more debugging
             if (!response.ok) {
                 throw new Error('Network response not ok');
             }
@@ -49,4 +51,4 @@ const SearchComponent = () => {
     );
 };
 
-export default searchComponent;
+export default SearchComponent;
